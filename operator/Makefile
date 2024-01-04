@@ -150,7 +150,7 @@ create-client: test
 	./hack/update-codegen.sh
 
 # Build the docker image
-docker-build: test generate-resources
+docker-build: generate-resources
 	docker build . -t ${IMG}
 
 
@@ -405,5 +405,3 @@ update_openshift_certified: update_old_certified_packages create_certified_bundl
 PREV_VERSION=1.6.0
 update_config:
 	sed -i s#${PREV_VERSION}#${VERSION}# config/manifests/bases/seldon-operator.clusterserviceversion.yaml
-
-

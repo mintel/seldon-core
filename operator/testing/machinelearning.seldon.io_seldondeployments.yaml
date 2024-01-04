@@ -3,7 +3,8 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: seldon-system/seldon-serving-cert
-    controller-gen.kubebuilder.io/version: v0.5.0
+    controller-gen.kubebuilder.io/version: v0.4.1
+  creationTimestamp: "null"
   labels:
     app: seldon
     app.kubernetes.io/instance: seldon1
@@ -8119,7 +8120,8 @@ spec:
           description: SeldonDeploymentStatus defines the observed state of SeldonDeployment
           properties:
             address:
-              description: 'Addressable placeholder until duckv1 issue is fixed:    https://github.com/kubernetes-sigs/controller-tools/issues/391'
+              description: "Addressable placeholder until duckv1 issue is fixed: \n
+                \thttps://github.com/kubernetes-sigs/controller-tools/issues/391"
               properties:
                 url:
                   type: string

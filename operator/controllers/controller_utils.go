@@ -51,7 +51,7 @@ func getAnnotation(mlDep *machinelearningv1.SeldonDeployment, annotationKey stri
 	}
 }
 
-//get annotations that start with seldon.io/engine
+// get annotations that start with seldon.io/engine
 func getEngineEnvAnnotations(mlDep *machinelearningv1.SeldonDeployment) []corev1.EnvVar {
 
 	envVars := make([]corev1.EnvVar, 0)

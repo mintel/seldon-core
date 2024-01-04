@@ -627,7 +627,7 @@ func (r *SeldonDeploymentReconciler) createComponents(ctx context.Context, mlDep
 	return &c, nil
 }
 
-//Creates Service for Predictor - exposed externally (ambassador or istio)
+// Creates Service for Predictor - exposed externally (ambassador or istio)
 func createPredictorService(pSvcName string, seldonId string, p *machinelearningv1.PredictorSpec,
 	mlDep *machinelearningv1.SeldonDeployment,
 	engine_http_port int,
@@ -1784,12 +1784,12 @@ func (r *SeldonDeploymentReconciler) Reconcile(ctx context.Context, req ctrl.Req
 		return ctrl.Result{}, err
 	}
 
-	hpasReady, err := r.createHpas(components, instance, log)
-	if err != nil {
-		r.Recorder.Eventf(instance, corev1.EventTypeWarning, constants.EventsInternalError, err.Error())
-		r.updateStatusForError(instance, err, log)
-		return ctrl.Result{}, err
-	}
+	// hpasReady, err := r.createHpas(components, instance, log)
+	// if err != nil {
+	// 	r.Recorder.Eventf(instance, corev1.EventTypeWarning, constants.EventsInternalError, err.Error())
+	// 	r.updateStatusForError(instance, err, log)
+	// 	return ctrl.Result{}, err
+	// }
 
 	kedaScaledObjectsReady := false
 	withKedaSupport := utils.GetEnv(ENV_KEDA_ENABLED, "false") == "true"
@@ -1804,12 +1804,12 @@ func (r *SeldonDeploymentReconciler) Reconcile(ctx context.Context, req ctrl.Req
 		instance.Status.CreateCondition(machinelearningv1.KedaReady, true, machinelearningv1.KedaNotDefinedReason)
 	}
 
-	pdbsReady, err := r.createPdbs(components, instance, log)
-	if err != nil {
-		r.Recorder.Eventf(instance, corev1.EventTypeWarning, constants.EventsInternalError, err.Error())
-		r.updateStatusForError(instance, err, log)
-		return ctrl.Result{}, err
-	}
+	// pdbsReady, err := r.createPdbs(components, instance, log)
+	// if err != nil {
+	// 	r.Recorder.Eventf(instance, corev1.EventTypeWarning, constants.EventsInternalError, err.Error())
+	// 	r.updateStatusForError(instance, err, log)
+	// 	return ctrl.Result{}, err
+	// }
 
 	deploymentsReady, err := r.createDeployments(components, instance, log)
 	if err != nil {
@@ -1827,7 +1827,7 @@ func (r *SeldonDeploymentReconciler) Reconcile(ctx context.Context, req ctrl.Req
 		}
 	}
 
-	if deploymentsReady && servicesReady && hpasReady && pdbsReady && (!withKedaSupport || kedaScaledObjectsReady) {
+	if deploymentsReady && servicesReady && (!withKedaSupport || kedaScaledObjectsReady) {
 		instance.Status.State = machinelearningv1.StatusStateAvailable
 		instance.Status.Description = ""
 	} else {
